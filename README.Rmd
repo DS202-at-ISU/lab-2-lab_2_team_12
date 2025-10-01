@@ -18,9 +18,9 @@ Follow the instructions posted at https://ds202-at-isu.github.io/labs.html for t
 
 Include your answers in this document (Rmd file). Make sure that it knits properly (into the md file). Upload both the Rmd and the md file to your repository.  
 
-```{r setup, include=FALSE}
-install.packages("remotes")
-install.packages("ggplot2")
+```{r , include=FALSE}
+# install.packages("remotes")
+# install.packages("ggplot2")
 library(classdata)
 library(ggplot2)
 
