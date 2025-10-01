@@ -28,3 +28,22 @@ will be automatically uploaded for grading once the due date is passed.
 Submit a link to your repository on Canvas (only one submission per
 team) to signal to the instructors that you are done with your
 submission.
+
+Isabel’s Work:
+
+``` r
+library(ggplot2)
+ggplot(ames, aes(x = Acres, y = `Sale Price`)) +
+  geom_point() +
+  labs(title = "Scatterplot")
+```
+
+    ## Warning: Removed 89 rows containing missing values or values outside the scale range
+    ## (`geom_point()`).
+
+![](README_files/figure-gfm/unnamed-chunk-2-1.png)<!-- -->
+
+- Most of the distribution in the scatterplot accross the x axis is
+  between 0.0 and 2.5 acres. Although there are outlier oddities. If I
+  were to take out outliers with high sales price or high acres, our
+  dataset would be more clear to read.
