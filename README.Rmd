@@ -31,7 +31,6 @@ names(ames)
 ## Variables (#1)
 Variables include
 
-<<<<<<< Updated upstream
 - Parcel Id is a chr of id
 - Address chr of address
 - Style is a character fctr which is style of house
@@ -48,7 +47,6 @@ Variables include
 - AC is logical value of if propertyh has ac
 - FirePlace logical value of if has fire place
 - Neighborhood factor variable of neighborhood area in ames
-=======
  - Parcel Id is a chr of id
  - Address chr of address
  - Style is a character fctr which is style of house
@@ -65,11 +63,8 @@ Variables include
  - AC is logical value of if propertyh has ac
  - FirePlace logical value of if has fire place
  - Neighborhood factor variable of neighborhood area in ames
->>>>>>> Stashed changes
-All submissions to the github repo will be automatically uploaded for grading once the due date is passed.
-Submit a link to your repository on Canvas (only one submission per team) to signal to the instructors that you are done with your submission.
 
-=======
+
 
 ## Variable of Main Interest (#2)
 
@@ -109,9 +104,10 @@ ggplot(ames_filtered, aes(x = `Sale Price`)) +
 As a team we said generally most houses are under \$500,000, there appears to be a somewhat normal distribution centered around ~\$240,000. The sale price is right skewed.There are significant outliers that affect the data.
 
 
+## Number 4:
 
 
-Isabel's Work:
+# Isabel's Work:
 ```{r, message=FALSE}
 library(ggplot2)
 ggplot(ames, aes(x = Acres, y = `Sale Price`)) +
@@ -121,7 +117,7 @@ ggplot(ames, aes(x = Acres, y = `Sale Price`)) +
 
 - Most of the distribution in the scatterplot accross the x axis is between 0.0 and 2.5 acres. Although there are outlier oddities. If I were to take out outliers with high sales price or high acres, our dataset would be more clear to read. When observing the outliers, there isn't a correlation between price and acres. The acres with the highest count aren't high in price and vice versa for price. This leads me to believe that other variables are impacting this data.
 
-## #4 Logan Pappas
+# Logan Pappas
 
 - Range of Bedrooms variable -
 ```{r , include=TRUE}
@@ -134,10 +130,54 @@ ggplot(ames, aes(x = factor(Bedrooms), y = log10(`Sale Price`))) +
 
 ```
 
-## Explanation
+# Explanation
 
 There are a few extreme outliers that are homes selling for several million dollars. This made most homes appear compressed near zero on the y-axis. Becuase of this I applied a log10 next to sales price to reveal a more of what the data shows. Homes with more bedrooms generally sold for more, but there was more variation within each category. Some 5+ bedroom homes sold for less than typical 3 or 4 bedroom homes, showing that other factors other than bedroom could influence price.
 
 
+# Caleb Moe's Work:
+
+Total living Area is my  variable.
+```{r}
+summary(ames$`TotalLivingArea (sf)`)
+```
+
+The range is 0 to 6007 sq ft.
+
+plot:
+```{r}
+ggplot(ames, aes(x = `TotalLivingArea (sf)`)) + geom_histogram()
+```
+
+```{r, message = FALSE}
+ggplot(ames, aes(x = `TotalLivingArea (sf)`, y = `Sale Price`)) + geom_point()
+
+```
+
+
+After filtering for houses over 1 million:
+
+```{r, message = FALSE}
+ggplot(ames_filtered, aes(x = `TotalLivingArea (sf)`, y = `Sale Price`)) + geom_point()
+
+```
+
+after filtering for N/A or 0 values for either variable:
+```{r, include=FALSE}
+ames_filtered <- ames[
+  !is.na(ames$`TotalLivingArea (sf)`) &
+  !is.na(ames$`Sale Price`) &
+  ames$`TotalLivingArea (sf)` > 0 &
+  ames$`Sale Price` > 0 &
+  ames$`Sale Price` <1000000,
+]
+```
+
+```{r}
+ggplot(ames_filtered, aes(x = `TotalLivingArea (sf)`, y = `Sale Price`)) + geom_point()
+
+```
+
+After plotting, you can see that living space and sale price ARE positively correlated, however there are major outliers that do not have much living area at all and are selling for many millions of dollars.This implies that there is likely another reason why these outliers exist. 
 
 

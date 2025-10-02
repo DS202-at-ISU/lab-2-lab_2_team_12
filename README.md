@@ -31,13 +31,23 @@ Variables include
 - LotArea dbl of lot area in sq feet
 - AC is logical value of if propertyh has ac
 - FirePlace logical value of if has fire place
-- Neighborhood factor variable of neighborhood area in ames All
-  submissions to the github repo will be automatically uploaded for
-  grading once the due date is passed. Submit a link to your repository
-  on Canvas (only one submission per team) to signal to the instructors
-  that you are done with your submission.
-
-=======
+- Neighborhood factor variable of neighborhood area in ames
+- Parcel Id is a chr of id
+- Address chr of address
+- Style is a character fctr which is style of house
+- Occupancy is a character fctr of occupancy
+- Sale Date is a date of when sold
+- Sale Price is a dbl of sale price
+- Multi Sale chr of if sold multi or not
+- Year Built int of when built
+- Acres dbl of acre amount
+- Total living Area int of total living area
+- Bedrooms int of how many bedrooms
+- FinishedBsmtAre is a dbl of total area of finished basement
+- LotArea dbl of lot area in sq feet
+- AC is logical value of if propertyh has ac
+- FirePlace logical value of if has fire place
+- Neighborhood factor variable of neighborhood area in ames
 
 ## Variable of Main Interest (#2)
 
@@ -83,7 +93,9 @@ appears to be a somewhat normal distribution centered around ~\$240,000.
 The sale price is right skewed.There are significant outliers that
 affect the data.
 
-Isabel’s Work:
+## Number 4:
+
+# Isabel’s Work:
 
 ``` r
 library(ggplot2)
@@ -104,3 +116,95 @@ ggplot(ames, aes(x = Acres, y = `Sale Price`)) +
   there isn’t a correlation between price and acres. The acres with the
   highest count aren’t high in price and vice versa for price. This
   leads me to believe that other variables are impacting this data.
+
+# Logan Pappas
+
+- Range of Bedrooms variable -
+
+``` r
+range(ames$Bedrooms, na.rm = TRUE)
+```
+
+    ## [1]  0 10
+
+- Box Plot of Sale price compared to Bedrooms
+
+``` r
+ggplot(ames, aes(x = factor(Bedrooms), y = log10(`Sale Price`))) +
+  geom_boxplot()
+```
+
+    ## Warning: Removed 2206 rows containing non-finite outside the scale range
+    ## (`stat_boxplot()`).
+
+![](README_files/figure-gfm/unnamed-chunk-6-1.png)<!-- -->
+
+# Explanation
+
+There are a few extreme outliers that are homes selling for several
+million dollars. This made most homes appear compressed near zero on the
+y-axis. Becuase of this I applied a log10 next to sales price to reveal
+a more of what the data shows. Homes with more bedrooms generally sold
+for more, but there was more variation within each category. Some 5+
+bedroom homes sold for less than typical 3 or 4 bedroom homes, showing
+that other factors other than bedroom could influence price.
+
+# Caleb Moe’s Work:
+
+Total living Area is my variable.
+
+``` r
+summary(ames$`TotalLivingArea (sf)`)
+```
+
+    ##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA's 
+    ##       0    1095    1460    1507    1792    6007     447
+
+The range is 0 to 6007 sq ft.
+
+plot:
+
+``` r
+ggplot(ames, aes(x = `TotalLivingArea (sf)`)) + geom_histogram()
+```
+
+    ## `stat_bin()` using `bins = 30`. Pick better value `binwidth`.
+
+    ## Warning: Removed 447 rows containing non-finite outside the scale range
+    ## (`stat_bin()`).
+
+![](README_files/figure-gfm/unnamed-chunk-8-1.png)<!-- -->
+
+``` r
+ggplot(ames, aes(x = `TotalLivingArea (sf)`, y = `Sale Price`)) + geom_point()
+```
+
+    ## Warning: Removed 447 rows containing missing values or values outside the scale range
+    ## (`geom_point()`).
+
+![](README_files/figure-gfm/unnamed-chunk-9-1.png)<!-- -->
+
+After filtering for houses over 1 million:
+
+``` r
+ggplot(ames_filtered, aes(x = `TotalLivingArea (sf)`, y = `Sale Price`)) + geom_point()
+```
+
+    ## Warning: Removed 423 rows containing missing values or values outside the scale range
+    ## (`geom_point()`).
+
+![](README_files/figure-gfm/unnamed-chunk-10-1.png)<!-- -->
+
+after filtering for N/A or 0 values for either variable:
+
+``` r
+ggplot(ames_filtered, aes(x = `TotalLivingArea (sf)`, y = `Sale Price`)) + geom_point()
+```
+
+![](README_files/figure-gfm/unnamed-chunk-12-1.png)<!-- -->
+
+After plotting, you can see that living space and sale price ARE
+positively correlated, however there are major outliers that do not have
+much living area at all and are selling for many millions of
+dollars.This implies that there is likely another reason why these
+outliers exist.
