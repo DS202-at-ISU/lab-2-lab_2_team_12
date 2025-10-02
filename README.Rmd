@@ -31,6 +31,7 @@ names(ames)
 ## Variables (#1)
 Variables include
 
+<<<<<<< Updated upstream
 - Parcel Id is a chr of id
 - Address chr of address
 - Style is a character fctr which is style of house
@@ -47,11 +48,71 @@ Variables include
 - AC is logical value of if propertyh has ac
 - FirePlace logical value of if has fire place
 - Neighborhood factor variable of neighborhood area in ames
+=======
+ - Parcel Id is a chr of id
+ - Address chr of address
+ - Style is a character fctr which is style of house
+ - Occupancy is a character fctr of occupancy
+ - Sale Date is a date of when sold
+ - Sale Price is a dbl of sale price
+ - Multi Sale chr of if sold multi or not
+ - Year Built int of when built
+ - Acres dbl of acre amount
+ - Total living Area int of total living area
+ - Bedrooms int of how many bedrooms
+ - FinishedBsmtAre is a dbl of total area of finished basement
+ - LotArea dbl of lot area in sq feet
+ - AC is logical value of if propertyh has ac
+ - FirePlace logical value of if has fire place
+ - Neighborhood factor variable of neighborhood area in ames
+>>>>>>> Stashed changes
 All submissions to the github repo will be automatically uploaded for grading once the due date is passed.
 Submit a link to your repository on Canvas (only one submission per team) to signal to the instructors that you are done with your submission.
 
+=======
+
+## Variable of Main Interest (#2)
+
+We think that the variable of particular interest is probably the sale price. You can compare sale price to every other variable and try to find out why it is lower or higher.
+
+
+
+## Exploration of Main Variable (#3)
+
+The Main variable is the sale price. 
+
+
+```{r, message=FALSE}
+library(classdata)
+library(ggplot2)
+summary(ames$`Sale Price`)
+
+ggplot(ames, aes(x = `Sale Price`)) +
+  geom_histogram(bins = 40)
+
+```
+The range of sale price is from \$0 to \$20,500,000. The median sale price is $170,900.
+
+
+After Filtering for houses over 1,000,000 this is the filtered chart:
+
+
+```{r, message=FALSE}
+
+ames_filtered <- ames[ames$`Sale Price` < 1000000, ]
+
+ggplot(ames_filtered, aes(x = `Sale Price`)) +
+  geom_histogram(bins = 40)
+
+```
+
+As a team we said generally most houses are under \$500,000, there appears to be a somewhat normal distribution centered around ~\$240,000. The sale price is right skewed.There are significant outliers that affect the data.
+
+
+
+
 Isabel's Work:
-```{r}
+```{r, message=FALSE}
 library(ggplot2)
 ggplot(ames, aes(x = Acres, y = `Sale Price`)) +
   geom_point() +
